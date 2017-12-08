@@ -1,0 +1,16 @@
+version: '3.0'
+
+services:
+  haskell:
+    # image: haskell
+    build: haskell_container
+    hostname: haskell
+    container_name: haskell_container
+    # network_mode: host
+    # restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./Projects:/home/hs/Projects
+
+    
