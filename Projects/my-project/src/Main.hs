@@ -3,10 +3,10 @@
 
 module Main where
 
-import Prelude -- hiding () -- (Int, foldl, fromInteger, (+), (.), ($), IO, show, getLine, readLn, (++))
+-- import Prelude --  as Pl  -- hiding () -- (Int, foldl, fromInteger, (+), (.), ($), IO, show, getLine, readLn, (++))
+import Data.ByteString.Lazy.Char8 as Char8 hiding (putStrLn,readFile)
 
 import Data.Time (getCurrentTime)
-import Data.ByteString.Lazy.Char8 as Char8 hiding (putStrLn,readFile)
 import Data.Aeson (encode)
 
 import MyFunctions (greet, doPrintMsg)
