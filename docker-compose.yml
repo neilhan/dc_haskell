@@ -12,5 +12,7 @@ services:
     tty: true
     volumes:
       - ./Projects:/home/hs/Projects
+      - ./haskell_container/ghc:/home/hs/.ghc
+      - ./haskell_container/stack:/home/hs/.stack
 
     

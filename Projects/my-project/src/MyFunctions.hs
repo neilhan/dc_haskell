@@ -15,3 +15,5 @@ class HasDef a where
 
 instance HasDef Bool where
   defValue _ = False
+
+

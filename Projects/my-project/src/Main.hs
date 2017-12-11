@@ -4,7 +4,8 @@
 module Main where
 
 -- import Prelude --  as Pl  -- hiding () -- (Int, foldl, fromInteger, (+), (.), ($), IO, show, getLine, readLn, (++))
-import Data.ByteString.Lazy.Char8 as Char8 hiding (putStrLn,readFile)
+import System.Environment
+import Data.ByteString.Lazy.Char8 as Char8 hiding (putStrLn,readFile,map,head)
 
 import Data.Time (getCurrentTime)
 import Data.Aeson (encode)
@@ -12,8 +13,17 @@ import Data.Aeson (encode)
 import MyFunctions (greet, doPrintMsg)
 import Control.Monad (replicateM_)
 
+import LogExamples
+
 main :: IO ()
-main = main3
+main = do main4
+
+-- get command line argument, read file, print to screen
+main4 = do
+  args <- getArgs
+  linesString <- readFile (head args)
+  putStrLn linesString
+  sequence_ [putStrLn a | a<- args]
 
 -- ask for message, 
 -- ask for how many times
@@ -25,7 +35,7 @@ main3 = do
   n <- readLn :: IO Int
   putStrLn $ "Repetting message " ++ show n ++ " times:"
   -- sequence_ [putStrLn msg | i <- [1..n]]
-  replicateM_ n (putStrLn msg)
+  -- replicateM_ n (putStrLn msg)
   -- doPrintMsg msg n
 
 main2 = do
