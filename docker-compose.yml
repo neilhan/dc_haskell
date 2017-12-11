@@ -1,4 +1,4 @@
-version: '3.0'
+version: '2.0'
 
 services:
   haskell:
@@ -6,13 +6,18 @@ services:
     build: haskell_container
     hostname: haskell
     container_name: haskell_container
-    # network_mode: host
-    # restart: always
-    stdin_open: true
-    tty: true
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
     volumes:
       - ./Projects:/home/hs/Projects
       - ./haskell_container/ghc:/home/hs/.ghc
       - ./haskell_container/stack:/home/hs/.stack
+    stdin_open: true
+    tty: true
+    command: bash
+    network_mode: host
+    # restart: always
 
     

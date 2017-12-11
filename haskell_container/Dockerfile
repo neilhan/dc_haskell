@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y apt-utils xz-utils make # sudo
 
 RUN useradd -ms /bin/bash hs 
 
+EXPOSE 3000
+
 USER hs
 
 VOLUME /home/hs/.ghc
