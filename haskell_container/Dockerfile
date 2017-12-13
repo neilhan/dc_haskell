@@ -10,6 +10,7 @@ USER hs
 
 VOLUME /home/hs/.ghc
 VOLUME /home/hs/.stack
+VOLUME /home/hs/.local
 VOLUME /HOME/hs/Projects
 
 WORKDIR /home/hs

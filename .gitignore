@@ -2,3 +2,5 @@
 *.swp
 *.hi
 *.o
+.idea
+nvidia-docker-compose.yml
