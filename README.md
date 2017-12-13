@@ -5,6 +5,7 @@ docker-compose build
 docker-compose run haskell bash
 
 cd Projects/my-project
+stack install hpack
 stack setup
 stack build
 stack exec my-project
