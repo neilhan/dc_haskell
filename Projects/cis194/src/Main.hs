@@ -33,8 +33,7 @@ data TowersWithHistory = TowersWithHistory {
 findHanoiSolution :: [PegState] -> [TowersWithHistory] -> TowersWithHistory
 findHanoiSolution pegs towers
   | (containsSolution pegs towers)  = getTheSolution pegs towers
-  | otherwise     =
-        findHanoiSolution pegs (towers >>= findAllMoves)
+  | otherwise                       = findHanoiSolution pegs (towers >>= findAllMoves)
 
 
 containsSolution ps towers =
@@ -47,7 +46,7 @@ getTheSolution ps towers =
 initPegState :: Peg->Int->PegState
 initPegState peg numDisk
   | numDisk > 0 = PegState peg [1..numDisk]
-  | otherwise = PegState peg []
+  | otherwise   = PegState peg []
 
 
 -- is a move legal?
