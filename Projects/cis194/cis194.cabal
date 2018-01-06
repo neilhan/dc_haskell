@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 93920217f4faa05591d7a627e1eeb84869466c7160c50f14ceacaa07c257ed09
+-- hash: cee63c309cdd3b8ed4eec3206b212f1309f65930bb02d4b63098129ff55de229
 
 name:           cis194
 version:        0.1.0.0
@@ -25,6 +25,7 @@ executable cis194
       src
   build-depends:
       base >=4.7 && <5
+    , containers
     , split
   other-modules:
       Week2.Log

@@ -1,5 +1,5 @@
 ## Dockerfile for a haskell environment
-FROM       fedora
+FROM       ubuntu
 
 ## ensure locale is set during build
 ENV LANG            C.UTF-8
@@ -25,13 +25,15 @@ ENV LANG            C.UTF-8
 # ------------------------------
 # FROM haskell:8.0
 
-RUN dnf update -y
-RUN dnf upgrade -y
-RUN dnf install -y haskell-platform cabal-install happy alex
-RUN dnf install -y git curl tmux wget
-# RUN dnf install -y zlib1g-dev libtinfo-dev libsqlite3-0 libsqlite3-dev ca-certificates g++ git curl
-# RUN apt-get install -y postgresql postgresql-contrib libpq-dev
+RUN apt-get update
+RUN apt-get upgrade -y
+RUN apt-get install -y haskell-platform cabal-install alex
+RUN apt-get install -y --no-install-recommends \
+        zlib1g-dev libtinfo-dev libsqlite3-0 libsqlite3-dev ca-certificates g++ git curl
 RUN curl -sSL https://get.haskellstack.org/ | sh
+RUN apt-get install -y tmux
+
+# RUN apt-get install -y postgresql postgresql-contrib libpq-dev
 
 # setup user
 RUN useradd -ms /bin/bash hs 
