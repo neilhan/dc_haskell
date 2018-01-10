@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cee63c309cdd3b8ed4eec3206b212f1309f65930bb02d4b63098129ff55de229
+-- hash: 50e1ee54a8baef2665e3af7306ac4ecb50b91929ca6632ccb4e91da076e43c72
 
 name:           cis194
 version:        0.1.0.0
@@ -33,5 +33,6 @@ executable cis194
       Week2.NanoParsec
       Week2.Parser
       Week3
+      Week4
       Paths_cis194
   default-language: Haskell2010
