@@ -23,3 +23,25 @@ fun2' =
   . filter even
   . takeWhile (/=1)
   . iterate (\n -> if even n then div n 2 else 3 * n + 1)
+
+
+-- folding a list to a balanced binary tree
+
+data Tree a = Leaf
+            | Node Integer (Tree a) a (Tree a)
+            deriving (Show, Eq)
+
+foldTree :: [a] -> Tree a
+foldTree =
+  foldr addToTree Leaf
+  where addToTree a Leaf
+            = Node 0 Leaf a Leaf
+        addToTree a (Node lv tl v tr)
+            = if (level tl) <= (level tr) then  -- add to left
+                  let new_tl = addToTree a tl in
+                  Node (level new_tl + 1) new_tl v tr
+              else -- add to right
+                  let new_tr = addToTree a tr in
+                  Node (level new_tr + 1) tl v new_tr
+        level Leaf = -1
+        level (Node lv _ _ _) = lv
