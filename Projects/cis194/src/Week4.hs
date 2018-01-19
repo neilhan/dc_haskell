@@ -45,3 +45,29 @@ foldTree =
                   Node (level new_tr + 1) tl v new_tr
         level Leaf = -1
         level (Node lv _ _ _) = lv
+
+-- xor [True, False, True] => False
+-- xor [True, False, True, True ] => True
+-- when bool array has odd number of Trues, return true
+xor :: [Bool] -> Bool
+xor = odd . length . filter (== True)
+
+-- map as fold, map behave as standard map
+map' :: (a -> b) -> [a] -> [b]
+map' f = foldr (\v cu-> [f v] ++ cu) []
+
+-- foldl implemented with foldr
+foldl' f x = foldr (flip f) x . reverse
+
+
+-- exercise 4, finding odd prime numbers
+-- Read about the Sieve of Sundaram. Implement the algorithm using function composition.
+-- Given an integer n, your function should generate all the odd prime numbers up to 2n + 2.
+-- http://en.wikipedia.org/wiki/Sieve_of_Sundaram
+
+sieveSundaram :: Integer -> [Integer]
+sieveSundaram n
+  | n > 0  =
+       let excludes n = [(i + j + 2 * i * j) | i<-[1..n], j<-[i..n], (i+j+2*i*j) <=n ]
+       in map (\x->x*2+1) $ filter (\n->not (elem n (excludes n))) [1..n]
+  | n <= 0 = []
