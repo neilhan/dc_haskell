@@ -1,4 +1,6 @@
 {-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+
 
 module Week5.Calc where
 
@@ -22,13 +24,13 @@ evalStr str = do
 -- exercise 3, define type class --------------------------
 class Expr a where
   lit :: Integer -> a
-  mul :: a -> a -> a
   add :: a -> a -> a
+  mul :: a -> a -> a
 
 instance Expr ExprT where
   lit = Lit
-  mul = Mul
   add = Add
+  mul = Mul
 
 -- (mul (lit 1) (lit 2))::ExprT works as well
 reify :: ExprT -> ExprT
@@ -40,8 +42,8 @@ newtype Mod7 = Mod7 Integer deriving (Eq, Show)
 
 instance Expr Integer where
   lit = id
-  mul = (*)
   add = (+)
+  mul = (*)
 
 instance Expr Bool where
   lit = (>0)
@@ -69,4 +71,15 @@ testSat = testExp :: Maybe Mod7
 
 -- exercise 5 stack --------------------------
 
-compile :: String -> Maybe Program
+-- compile :: String -> Maybe Stack.Program
+instance Expr Stack.Program where
+  lit a = [Stack.PushI a]
+  add a b = a ++ b ++ [Stack.Add]
+  mul a b = a ++ b ++ [Stack.Mul]
+
+compile :: String -> Maybe Stack.Program
+compile str = parseExp lit add mul str
+
+-- to test:
+-- compile "1 + 1*2" ==> Just [PushI 1,PushI 1,PushI 2,Mul,Add]
+
