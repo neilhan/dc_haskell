@@ -28,16 +28,16 @@ tag _ = mempty
 indexJ :: (Sized b, Monoid b) => Int -> JoinList b a -> Maybe a
 
 indexJ i j
-  | i < 0                         = Nothing
-  | i >= (getSize . size . tag) j = Nothing
+  | i < 0          = Nothing
+  | i >= sizeOfJ j = Nothing
 
-indexJ i (Single b a)
+indexJ i (Single m a)
   | i == 0    = Just a
   | otherwise = Nothing
 
 indexJ i (Append m a b)
   | i < sizeOfJ a = indexJ i a
-  | otherwise                    = indexJ (i - sizeOfJ a) b
+  | otherwise     = indexJ (i - sizeOfJ a) b
 
 indexJ _ _ = Nothing
 
@@ -56,4 +56,11 @@ dropJ i (Append m a b)
                       in newA +++ b
     | otherwise     = dropJ (i - sizeOfJ a) b
 
-sizeOfJ = getSize . size . tag
+sizeOfJ :: (Sized m, Monoid m) => JoinList m a -> Int
+sizeOfJ = (getSize . size . tag)
+
+-- To test in ghci
+-- a = Append (Size 3) (Append (Size 2) (Single (Size 1) 'a') (Single (Size 1) 'b')) (Single (Size 1) 'c')
+-- dropJ 1 a
+-- indexJ 1 a
+
