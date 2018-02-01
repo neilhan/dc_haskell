@@ -24,9 +24,11 @@ tag _ = mempty
 -- Exercise 2 ------------------------
 -- indexJ returnes the "a" at the [idx] starts at 0.
 -- In the JoinList b a, "b" is Sized, so can help
--- Note: Not sure about this solution. How to test this?
-indexJ :: (Sized b, Monoid b) => Int -> JoinList b a -> Maybe a
 
+sizeOfJ :: (Sized m, Monoid m) => JoinList m a -> Int
+sizeOfJ = (getSize . size . tag)
+
+indexJ :: (Sized b, Monoid b) => Int -> JoinList b a -> Maybe a
 indexJ i j
   | i < 0          = Nothing
   | i >= sizeOfJ j = Nothing
@@ -41,10 +43,10 @@ indexJ i (Append m a b)
 
 indexJ _ _ = Nothing
 
--- dropJ
+-- dropJ --------------------------
 dropJ :: (Sized b, Monoid b) => Int -> JoinList b a -> JoinList b a
 dropJ i j
-  | i <= 0                       = j
+  | i <= 0         = j
   | i >= sizeOfJ j = Empty
 
 dropJ i j@(Single b a)
@@ -56,11 +58,21 @@ dropJ i (Append m a b)
                       in newA +++ b
     | otherwise     = dropJ (i - sizeOfJ a) b
 
-sizeOfJ :: (Sized m, Monoid m) => JoinList m a -> Int
-sizeOfJ = (getSize . size . tag)
+-- dropJ --------------------------
+takeJ :: (Sized b, Monoid b) => Int -> JoinList b a -> JoinList b a
+takeJ i j
+  | i <= 0         = Empty
+  | i >= sizeOfJ j = j
 
+takeJ i j@(Single b a) = j
+
+takeJ i (Append m a b)
+    | i < sizeOfJ a = takeJ i a
+    | otherwise     = let newB = takeJ (i - sizeOfJ a) b
+                      in a +++ newB
 -- To test in ghci
 -- a = Append (Size 3) (Append (Size 2) (Single (Size 1) 'a') (Single (Size 1) 'b')) (Single (Size 1) 'c')
 -- dropJ 1 a
 -- indexJ 1 a
+-- takeJ 1 a
 
