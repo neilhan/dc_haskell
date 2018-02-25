@@ -20,4 +20,4 @@ dependencies:
 executables:
   cis194:
     source-dirs:      src
-    main:             Main.hs
+    main:             AParser.hs

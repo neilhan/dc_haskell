@@ -43,7 +43,7 @@ USER hs
 VOLUME /home/hs/.ghc
 VOLUME /home/hs/.stack
 VOLUME /home/hs/.local
-VOLUME /HOME/hs/Projects
+VOLUME /home/hs/Projects
 
 ENV PATH /root/.cabal/bin:/root/.local/bin:/opt/cabal/2.0/bin:\
 /opt/ghc/8.2.1/bin:/opt/happy/1.19.5/bin:/opt/alex/3.1.7/bin:\

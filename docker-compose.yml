@@ -1,24 +1,19 @@
 version: '2.0'
 
 services:
-  haskell:
-    # image: haskell
-    build: haskell_container
-    hostname: haskell
-    container_name: haskell_container
-    expose:
-      - 3000
-    ports:
-      - 3000:3000
-    volumes:
-      - ./Projects:/home/hs/Projects
-      - ./haskell_container/ghc:/home/hs/.ghc
-      - ./haskell_container/stack:/home/hs/.stack
-      - ./haskell_container/home_local:/home/hs/.local
-    stdin_open: true
-    tty: true
-    command: bash
-    network_mode: host
-    # restart: always
 
-    
+  haskell:
+    build: ./container
+    hostname: haskell
+    container_name: haskell
+    network_mode: host
+    volumes:
+      - ./home/hs/ghc:/home/hs/.ghc
+      - ./home/hs/stack:/home/hs/.stack
+      - ./home/hs/local:/home/hs/.local
+      - ./Projects:/home/hs/Projects
+    privileged: true
+    environment:
+      - DISPLAY 
+    entrypoint: /usr/bin/bash  # /usr/bin/firefox # chromium-browser
+
