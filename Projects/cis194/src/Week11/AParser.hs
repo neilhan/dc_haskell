@@ -42,3 +42,17 @@ instance Applicative Parser where
 instance Alternative Parser where
   empty = Parser (const Nothing)
   Parser p1 <|> Parser p2 = Parser $ liftA2 (<|>) p1 p2
+
+-- exercise 1 parser for lists of widgets -----------------
+zeroOrMore :: Parser a -> Parser [a]
+zeroOrMore pa =
+  Parser (f [])
+  where
+    f ary str =
+      case runParser pa str of
+        Nothing -> case ary of
+                    [] -> Nothing
+                    otherwise -> Just (ary, str)
+        Just (a, str_) -> f (ary++[a]) str_
+
+-- oneOrMore :: Parser a -> Parser [a]

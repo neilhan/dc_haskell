@@ -2,7 +2,7 @@
    due Monday, 8 April
 -}
 
-module SExpr where
+module Week11.SExpr where
 
 import AParser
 import Control.Applicative
