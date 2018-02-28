@@ -16,8 +16,9 @@ dependencies:
   - split
   - containers
   - mtl
+  - MonadRandom
 
 executables:
   cis194:
     source-dirs:      src
-    main:             AParser.hs
+    main:             Main.hs

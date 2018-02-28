@@ -1,8 +1,8 @@
--- This file has been generated from package.yaml by hpack version 0.20.0.
+-- This file has been generated from package.yaml by hpack version 0.21.2.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: e8e14491906880fc9ba726d9596ed9604befb13bcff0813c2fc94120b44edf36
+-- hash: 04ee0ec9c24bac6290a410c6f93c0e48f01e202b32d1e8cd23c1a279efba142c
 
 name:           cis194
 version:        0.1.0.0
@@ -20,18 +20,19 @@ extra-source-files:
     README.md
 
 executable cis194
-  main-is: AParser.hs
+  main-is: Main.hs
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      MonadRandom
+    , base >=4.7 && <5
     , containers
     , mtl
     , split
   other-modules:
-      Main
       Week11.AParser
       Week11.SExpr
+      Week12.Risk
       Week2.Log
       Week2.LogAnalysis
       Week2.NanoParsec

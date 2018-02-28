@@ -43,3 +43,7 @@ instance Alternative Parser where
   empty = Parser (const Nothing)
   Parser p1 <|> Parser p2 = Parser $ liftA2 (<|>) p1 p2
 
+main :: IO ()
+main = do
+  putStrLn "hello, world"
+

@@ -20,6 +20,8 @@ instance Random DieValue where
 die :: Rand StdGen DieValue
 die = getRandom
 
+dice :: Int -> Rand StdGen [DieValue]
+dice n = replicateM n die
 ------------------------------------------------------------
 -- Risk
 
