@@ -27,6 +27,7 @@ ENV LANG            C.UTF-8
 
 RUN dnf update -y
 RUN dnf upgrade -y
+RUN dnf install -y procps
 RUN dnf install -y haskell-platform cabal-install happy alex
 RUN dnf install -y git curl tmux wget
 # RUN dnf install -y zlib1g-dev libtinfo-dev libsqlite3-0 libsqlite3-dev ca-certificates g++ git curl

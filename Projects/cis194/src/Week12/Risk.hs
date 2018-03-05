@@ -28,3 +28,8 @@ dice n = replicateM n die
 type Army = Int
 
 data Battlefield = Battlefield { attackers :: Army, defenders :: Army }
+
+---------------------------------------------------
+-- Excersize 3 --------------------
+
+invade :: Battlefield -> Rand StdGen Battlefield
