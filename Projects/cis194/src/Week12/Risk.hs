@@ -3,6 +3,8 @@
 module Week12.Risk where
 
 import Control.Monad.Random
+import Data.Ord
+import Data.List
 
 ------------------------------------------------------------
 -- Die values
@@ -32,4 +34,16 @@ data Battlefield = Battlefield { attackers :: Army, defenders :: Army }
 ---------------------------------------------------
 -- Excersize 3 --------------------
 
+sortDesc :: Ord a => [a] -> [a]
+sortDesc = sortBy (flip compare)
+
+{-
 invade :: Battlefield -> Rand StdGen Battlefield
+invade bf = 
+  do
+    nAtt <- min 3 (attackers bf - 1)
+    nDef <- max 2 (defenders bf)
+    diceAtt <- sortDesc <$> dice nAtt
+    diceDef <- sortDesc <$> dice nDef
+-}
+  
