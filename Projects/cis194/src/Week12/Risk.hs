@@ -34,8 +34,6 @@ data Battlefield = Battlefield { attackers :: Army, defenders :: Army }
 
 ---------------------------------------------------
 -- Excersize 2 --------------------
--- !!! I am not sure whether this is correct. 
--- Please use your judgement. 
 -- -----------------------
 sortDesc :: Ord a => [a] -> [a]
 sortDesc = sortBy (flip compare)
