@@ -8,12 +8,11 @@ services:
     container_name: haskell
     network_mode: host
     volumes:
-      - ./home/hs/ghc:/home/hs/.ghc
-      - ./home/hs/stack:/home/hs/.stack
-      - ./home/hs/local:/home/hs/.local
+      - ./container/home/hs/ghc:/home/hs/.ghc
+      - ./container/home/hs/stack:/home/hs/.stack
+      - ./container/home/hs/local:/home/hs/.local
       - ./Projects:/home/hs/Projects
     privileged: true
     environment:
-      - DISPLAY 
+      - DISPLAY
     entrypoint: /usr/bin/bash  # /usr/bin/firefox # chromium-browser
-
