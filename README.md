@@ -36,4 +36,7 @@ stack exec real-world-haskell
 
 # run ghci
 stack ghci
+
+# run a haskell file
+stack exec -- runghc Main.hs
 ```
