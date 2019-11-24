@@ -23,3 +23,17 @@ docker-compose run -p 3000 --rm haskell bash
 
 2017 12 08 Started experiementing with Haskell. It's interesting, powerful, mind bending. Its purity is satisfying.
 
+
+# Start a new project
+Referce: https://docs.haskellstack.org/en/stable/README/
+```
+cd Projects
+stack new real-world-haskell
+cd real-world-haskell
+stack setup
+stack build
+stack exec real-world-haskell
+
+# run ghci
+stack ghci
+```
