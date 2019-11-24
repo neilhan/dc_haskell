@@ -15,4 +15,17 @@ main = mainWith fn
               [inFile, outFile] -> interactWith fn inFile outFile
               _ -> putStrLn "Error: exactly two arguments needed"
 
-    fn = id
+    fn = unlines . splitLines
+
+
+splitLines [] = []
+splitLines chars =
+  let (pref, suff) = break isLineTerm chars
+  in pref : case suff of
+    ('\r': '\n': rest) -> splitLines rest
+    ('\r': rest) -> splitLines rest
+    ('\n': rest) -> splitLines rest
+    _ -> []
+
+isLineTerm c =
+  c == '\r' || c == '\n'

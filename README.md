@@ -40,3 +40,9 @@ stack ghci
 # run a haskell file
 stack exec -- runghc Main.hs
 ```
+
+# GHCi
+```
+# load a file
+:l app/ch04/TwoFiles.hs
+```
