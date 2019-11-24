@@ -29,3 +29,14 @@ splitLines chars =
 
 isLineTerm c =
   c == '\r' || c == '\n'
+
+
+safeHead :: [a] -> Maybe a
+safeHead (h:t) = Just h
+safeHead [] = Nothing
+
+oddList :: [Int] -> [Int]
+oddList (x:xs)
+  | odd x = x : oddList xs
+  | otherwise = oddList xs
+oddList _ = []
