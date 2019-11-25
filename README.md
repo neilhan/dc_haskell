@@ -43,6 +43,8 @@ stack exec -- runghc Main.hs
 
 # GHCi
 ```
+# set src dir
+ghci -i./app:./src
 # load a file
 :l app/ch04/TwoFiles.hs
 ```
