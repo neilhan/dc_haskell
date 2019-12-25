@@ -1,4 +1,4 @@
-module Ch04.Main where
+module Ch04.TwoFiles where
 
 import System.Environment (getArgs)
 
