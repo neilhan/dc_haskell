@@ -7,14 +7,13 @@ module Ch05.Json (JsonValue(..),
              getArray,
              isNull) where
 
-data JsonValue =
-  JsonString String
-  | JsonNumber Double
-  | JsonBool Bool
-  | JsonNull
-  | JsonObject [(String, JsonValue)]
-  | JsonArray [JsonValue]
-  deriving (Eq, Ord, Show)
+data JsonValue = JsonString String
+               | JsonNumber Double
+               | JsonBool Bool
+               | JsonNull
+               | JsonObject [(String, JsonValue)]
+               | JsonArray [JsonValue]
+                  deriving (Eq, Ord, Show)
 
 data A =
   A {field :: String}

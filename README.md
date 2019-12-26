@@ -50,4 +50,6 @@ stack exec -- ghci -i./app:./src
 
 # load a file
 Prelude> :l app/Ch04/TwoFiles.hs
+# then import works
+Prelude> import Ch05/PrettyJson
 ```
