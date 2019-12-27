@@ -52,4 +52,8 @@ stack exec -- ghci -i./app:./src
 Prelude> :l app/Ch04/TwoFiles.hs
 # then import works
 Prelude> import Ch05/PrettyJson
+
+# show source code
+:info func
+:i read
 ```
