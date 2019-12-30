@@ -11,6 +11,8 @@ module Ch05.Json (JsonValue(..),
                   getArray,
                   isNull) where
 
+import Control.Arrow (second)
+
 data JsonValue = JsonString String
                | JsonNumber Double
                | JsonBool Bool
@@ -19,8 +21,11 @@ data JsonValue = JsonString String
                | JsonArray (JAry JsonValue) --[JsonValue]
                   deriving (Eq, Ord, Show)
 
-data A = A {field :: String}
-          deriving (Show)
+newtype JAry a = JAry {fromJAry :: [a]
+                      } deriving (Eq, Ord, Show)
+
+newtype JObj a = JObj {fromJObj :: [(String, a)]
+                      } deriving (Eq, Ord, Show)
 
 getString :: JsonValue -> Maybe String
 getString (JsonString s) = Just s
@@ -89,18 +94,27 @@ jaryToJsonValue :: (Json a) => JAry a -> JsonValue
 jaryToJsonValue = JsonArray . JAry . map toJsonValue . fromJAry
 
 jaryFromJsonValue :: (Json a) => JsonValue -> Either JsonError (JAry a)
-jaryFromJsonValue (JsonValue (JAry a)) = whenRight JAry (mapEithers fromJsonValue a)
+jaryFromJsonValue (JsonArray (JAry a)) = whenRight JAry (mapEithers fromJsonValue a)
 jaryFromJsonValue _ = Left "Not a Json Array"
 
-instance (Json a) => Json [(String, a)] where
-  toJsonValue = undefined
-  fromJsonValue = undefined
+whenRight :: (b -> c) -> Either a b -> Either a c
+whenRight _ (Left err) = Left err
+whenRight f (Right a) = Right (f a)
 
--- Json array -------------------------
-newtype JAry a = JAry {
-                      fromJAry :: [a]
-                      } deriving (Eq, Ord, Show)
+mapEithers :: (a -> Either b c) -> [a] -> Either b [c]
+mapEithers f (x:xs) = case mapEithers f xs of
+                      Left err -> Left err
+                      Right ys -> case f x of
+                                  Left err -> Left err
+                                  Right y -> Right (y:ys)
 
-newtype JObj a = JObj {
-                      fromJObj :: [(String, a)]
-                      } deriving (Eq, Ord, Show)
+mapEithers _ _ = Right []
+
+instance (Json a) => Json (JObj a) where
+  -- (JObj a) -> JsonObject
+  toJsonValue = JsonObject . JObj . map (second toJsonValue) . fromJObj
+  -- JsonObject -> Either String a -- JObj a
+  fromJsonValue (JsonObject (JObj a)) =
+    whenRight JObj (mapEithers unwrap a)
+    where unwrap (k,v) = whenRight ((,) k) (fromJsonValue v)
+  fromJsonValue _ = Left "Not a Json Object"

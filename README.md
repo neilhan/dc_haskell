@@ -49,11 +49,11 @@ ghci -i./app:./src
 stack exec -- ghci -i./app:./src
 
 # load a file
-:l app/Ch04/TwoFiles.hs
+> :l app/Ch04/TwoFiles.hs
 # then import works
-Prelude> import Ch05/PrettyJson
+> import Ch05/PrettyJson
 
 # show source code
-:info func
-:i read
+> :info func
+> :i read
 ```

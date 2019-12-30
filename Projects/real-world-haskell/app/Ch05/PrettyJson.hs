@@ -5,7 +5,7 @@ import Numeric (showHex)
 import Data.Bits (shiftR, (.&.))
 import Data.Char (ord)
 
-import Ch05.Json (JsonValue(..))
+import Ch05.Json (JsonValue(..), JObj(..), JAry(..))
 
 data Doc = Empty
          | Char Char
@@ -124,8 +124,8 @@ renderJsonValue (JsonBool False) = text "false"
 renderJsonValue JsonNull = text "null"
 renderJsonValue (JsonNumber num) = double num
 renderJsonValue (JsonString str) = string str
-renderJsonValue (JsonArray ary) = series '[' ']' renderJsonValue ary
-renderJsonValue (JsonObject o) = series '{' '}' field o
+renderJsonValue (JsonArray (JAry ary)) = series '[' ']' renderJsonValue ary
+renderJsonValue (JsonObject (JObj o)) = series '{' '}' field o
                                  where field (name, val) = string name <> text ": " <> renderJsonValue val
 
 compact :: Doc -> String
