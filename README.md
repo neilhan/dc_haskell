@@ -10,6 +10,12 @@ stack setup
 stack build
 stack exec my-project
 ```
+# add dependency, for example: directory, it's module System.Directory
+package.yaml
+```
+dependencies:
+- directory
+```
 
 To run scotty-hello:
 ```
@@ -29,6 +35,7 @@ Referce: https://docs.haskellstack.org/en/stable/README/
 ```
 cd Projects
 stack new real-world-haskell
+
 cd real-world-haskell
 stack setup
 stack build

@@ -40,7 +40,7 @@ myNot True = False
 myNot False = True
 
 -- guards
-lend amount banance
+lend amount balance
   | amount <= 0 = Nothing
   | amount > reserve * 0.5 = Nothing
   | otherwise = Just newBalance
