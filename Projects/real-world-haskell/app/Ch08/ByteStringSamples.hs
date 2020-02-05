@@ -19,4 +19,10 @@ main = do
 {-|
  putStr =<< readFile "prices.csv"
  readFile "prices.csv" >>= putStr
+
+Need "bytestring" package to be added to "build-depends" in .cabal file.
+Do not edit cabal file directly.
+To do that:
+To have "bytestring" package installed, add bytestring to package.yaml "dependencies:" section.
+then run: stack install
 -}

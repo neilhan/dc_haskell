@@ -16,6 +16,11 @@ package.yaml
 dependencies:
 - directory
 ```
+for curated packages that are not part of LTS set, add it in stack.yaml:
+```
+extra-deps:
+- acme-misiles-0.3
+```
 
 To run scotty-hello:
 ```
